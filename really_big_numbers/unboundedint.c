@@ -16,8 +16,10 @@ struct UnboundedInteger unbounded_integer_constructor(short sign, int size, ...)
 
   number.sign = sign;
   number.size = size;
-  number.hex = malloc(size * 8);
-
+  number.hex = malloc(size * 16 + 1);
+  number.hex[0] = '\0';
+  // The error was that I needed to initialize the hex to an empty string => Need to look into this.
+  
   for (int i = 0; i < size; i++) {
     char x[17];
     sprintf(x, "%llX", number.integer[i]);
